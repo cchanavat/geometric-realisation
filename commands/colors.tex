@@ -1,0 +1,77 @@
+% Do not forget to use:
+% \usepackage[dvipsnames]{xcolor}
+% \usepackage[breakable]{tcolorbox}
+% \tcbuselibrary{theorems}
+
+% COLORS
+\newcommand{\lemcolor}{CarnationPink}
+\newcommand{\thmcolor}{BrickRed}
+\newcommand{\defcolor}{RoyalBlue}
+\newcommand{\factcolor}{ForestGreen}
+\newcommand{\propcolor}{Dandelion}
+\newcommand{\corcolor}{RubineRed}
+\newcommand{\conscolor}{SpringGreen}
+
+\newcommand{\cstcolor}{RoyalPurple}
+\newcommand{\fncolor}{Orange}
+
+\newcommand{\emphcolor}{WildStrawberry}
+\newcommand{\cemph}[1]{\emph{\textcolor{\emphcolor!100}{#1}}}
+
+\newcounter{main_counter}%
+% THEOREMS ENV
+\tcbset{
+    genericstyle/.style={enhanced,breakable,theorem style=plain,colback=#1!5,colframe=#1!70!black,fonttitle=\bfseries,coltitle=#1!60!black,frame hidden,arc=0mm,boxsep=-1mm,
+    overlay first={
+        \draw[line width=0.5pt, #1!70!black] (frame.north west)--(frame.north east);
+        \draw[line width=0.2pt, #1!70!black, decorate, decoration={zigzag, segment length=3pt, amplitude=1pt}] (frame.south west)--(frame.south east);
+
+        \draw[line width=0.5pt, #1!70!black] ($(frame.north west) + (0, 0.25pt)$)--(frame.south west);
+        \draw[line width=0.5pt, #1!70!black] ($(frame.north east) + (0, 0.25pt)$)--(frame.south east);
+    },
+    overlay middle={%
+        \draw[line width=0.1pt, #1!70!black, decorate, decoration={zigzag, segment length=3pt, amplitude=1.0pt}] (frame.south west)--(frame.south east);
+        \draw[line width=0.1pt, #1!70!black, decorate, decoration={zigzag, segment length=3pt, amplitude=1.0pt}] (frame.north west)--(frame.north east);
+
+        \draw[line width=0.5pt, #1!70!black] (frame.north west)--(frame.south west);
+        \draw[line width=0.5pt, #1!70!black] (frame.north east)--(frame.south east);
+    },
+    overlay last={%
+        \draw[line width=0.1pt, #1!70!black, decorate, decoration={zigzag, segment length=3pt, amplitude=1.0pt}] (frame.north west)--(frame.north east);
+        \draw[line width=0.5pt, #1!70!black] (frame.south west)--(frame.south east);
+
+        \draw[line width=0.5pt, #1!70!black] (frame.north west)--($(frame.south west) - (0, 0.25pt)$);
+        \draw[line width=0.5pt, #1!70!black] (frame.north east)--($(frame.south east) - (0, 0.25pt)$);
+    },
+    overlay unbroken={%
+        \draw[line width=0.5pt, #1!70!black] (frame.north west)--(frame.north east);
+        \draw[line width=0.5pt, #1!70!black] (frame.south west)--(frame.south east);
+
+        \draw[line width=0.5pt, #1!70!black] (frame.north east)--($(frame.south east) - (0, 0.25pt)$);
+        \draw[line width=0.5pt, #1!70!black] (frame.north west)--($(frame.south west) - (0, 0.25pt)$);
+    },}
+}
+    
+\newtcbtheorem[use counter=main_counter]{clem}{Lemma}{genericstyle=\lemcolor}{lem}
+\newtcbtheorem[use counter=main_counter]{cthm}{Theorem}{genericstyle=\thmcolor}{thm}
+\newtcbtheorem[use counter=main_counter]{cdef}{Definition}{genericstyle=\defcolor}{def}
+\newtcbtheorem[use counter=main_counter]{fact}{Fact}{genericstyle=\factcolor}{fact}
+\newtcbtheorem[use counter=main_counter]{cprop}{Proposition}{genericstyle=\propcolor}{prop}
+\newtcbtheorem[use counter=main_counter]{ccor}{Corollary}{genericstyle=\corcolor}{cor}
+\newtcbtheorem[use counter=main_counter]{ccon}{Construction}{genericstyle=\conscolor}{cons}
+
+% PROOFS NAMES
+\newcommand{\citedef}[1]{\normalfont{\textbf{\textcolor{\defcolor!60!black}{Definition \ref{def:#1}}}}}
+\newcommand{\citelem}[1]{\normalfont{\textbf{\textcolor{\lemcolor!60!black}{Lemma \ref{lem:#1}}}}}
+\newcommand{\citethm}[1]{\normalfont{\textbf{\textcolor{\thmcolor!60!black}{Theorem \ref{thm:#1}}}}}
+\newcommand{\citefact}[1]{\normalfont{\textbf{\textcolor{\factcolor!60!black}{Fact \ref{fact:#1}}}}}
+\newcommand{\citeprop}[1]{\normalfont{\textbf{\textcolor{\propcolor!60!black}{Proposition \ref{prop:#1}}}}}
+\newcommand{\citecor}[1]{\normalfont{\textbf{\textcolor{\corcolor!60!black}{Corollary \ref{cor:#1}}}}}
+\newcommand{\citecons}[1]{\normalfont{\textbf{\textcolor{\conscolor!60!black}{Construction \ref{cons:#1}}}}}
+
+\newenvironment{lemproof}[1]{\begin{proof}{(\citelem{#1})}}{\end{proof}}
+\newenvironment{thmproof}[1]{\begin{proof}{(\citethm{#1})}}{\end{proof}}
+\newenvironment{propproof}[1]{\begin{proof}{(\citeprop{#1})}}{\end{proof}}
+\newenvironment{corproof}[1]{\begin{proof}{(\citecor{#1})}}{\end{proof}}
+\newenvironment{consproof}[1]{\begin{proof}{(\citecons{#1})}}{\end{proof}}
+
