@@ -1,0 +1,289 @@
+\section{Examples}
+We may now work with the latter geometric realisation.
+
+\subsection{The cone}
+
+Consider the poset \( C_n \):
+\begin{center}
+    \begin{tikzcd}
+        & \top \arrow[rd, no head] &                                                  \\
+        x_{n-1} \arrow[ru, no head] \arrow[d, no head] \arrow[rrd, no head] &                             & y_{n-1} \arrow[d, no head] \arrow[lld, no head] \\
+        \dots \arrow[rrd, no head]                                           &                            & \dots                                            \\
+        x_2 \arrow[d, no head] \arrow[u, no head] \arrow[rru, no head]       &                            & y_2 \arrow[d, no head] \arrow[u, no head]        \\
+        x_1 \arrow[rru, no head] \arrow[rd, no head]                         &                            & y_1 \arrow[llu, no head] \arrow[ld, no head]     \\
+                & \bot                       &                                                 
+    \end{tikzcd}
+\end{center}
+and preorder \( \bot \preceq x_i, y_i \) for all \( 1 \le x_i, y_i \le n-1 \). Notice that this is the pre-posetal set \( \U(O^n) \) where we remove the output 0-boundary. Abusing notations, we also call \( C_n \) the geometrical cone of \( \bbR^{n+1} \) whose base is a \( (n-2) \)-square, whose apex \( \bot \) is at the origin, and whose height is parallel to an axis that we call \( z \). If a point \( x \)  is in the cone, we call \( \theta \) the angle between the \( z \) axis and the line \( \bot x \). This way, each path determines another continuous path \( t \mapsto (z(t), \theta(t)) \).  We endow \( C_n \) with a directed topological structure by taking the dipaths \( dC_n \) to be all the piecewise-linear paths whose \( (z, \theta) \) value is weakly increasing.
+
+\begin{cprop}{Realisation of the cone}{realisation_cone}
+    We have 
+    \begin{equation*}
+        |C_n|_d \simeq (C_n, dC_n)
+    \end{equation*}
+\end{cprop}
+\begin{propproof}{realisation_cone}
+    First, it is the case that this is the realisation as (non-directed) topological spaces, indeed \( C_n \) will be the glueing along the correct faces of \( 2^{n-1} \)  \( n \)-simplices \( \bot u_1\dots u_{n-1} \top\) where \( u_i \in \{ x_i, y_i \} \), each one determined by a path from \( \bot \) to \( \top \) in the Hasse diagram of the cone. Each of this \( n \) simplex share the edge \( \top\bot \) and it suffice to check that in each of these simplex, the admissible path are piecewise linear, weakly increasing along the \( \top\bot \) edge.  
+    %More precisely, \( \bot \) will be send to the point \( 0 \in \bbR^{n+1} \) and \( \top \) to \( 1 \in \bbR^{n+1} \). Now, we let \(  \)  
+    
+    Let \( (D, dD) \defeq |\bot u_1\dots u_{n-1} \top|_d \) be such a directed simplex. To determine its admissible paths, it suffices to determine the maximal orderings \( P \) such that for all \( (i, j) \in P \), \( D_i \preceq D_j \). Indeed, if there is a smaller ordering \( Q \), then it will induce an inclusion of directed topological spaces via \( \id : ([n], Q) \to ([n], P) \). By construction of the preorder of the cone, we have
+    \begin{equation*}
+        P = \text{Diag} \cup \{ 0i \mid 1 \le i \le n \} 
+    \end{equation*}
+    Thus, \( dD \) is the closure under concatenation and reparametrisation of
+    \begin{equation*}
+        \{ \sum_{i=1}^n c_i \gamma_{0i} \mid \sum_{i=1}^n c_i = 1 \}
+    \end{equation*}
+    Note that by reparametrisation, one need not to include the constant paths in the sum. These paths are piecewise linear, and indeed each \( \gamma_{0i} \) is weakly increasing along \( (z, \theta) \). 
+    
+    Conversely, all linear path of increasing value along \( \bot\top \) are of the form (by reparametrisation) \( t \mapsto tx + (1-t)y  \) with \( x \le_{(z, \theta)} y \), and such a path can be written (how?) as a sum \( \sum\limits_{i=0}^n c_i \gamma_{0i} \).
+\end{propproof}
+
+\subsection{Globe, interval, sphere}
+Let \( C'_n \) be the cone \( C_n \) but with preorder \( x_i, y_i \preceq \bot \), i.e. \( C'_n = (C_n, \le, \op \preceq) \). If \( C \) is a preposetal set, then let \( C^* \) be the same preposetal set without its bottom element (when it exists). We have in \( \prePos \):
+\begin{equation*}
+    (C'_n)^* \simeq C_n^*
+\end{equation*}
+The globe \( O^n \) is then the pushout of inclusions in \( \prePos \):
+\begin{center}
+    \begin{tikzcd}
+        C_n^{'*}\simeq C_n^*  \arrow[dd, hook] \arrow[rr, hook] &  & C'_n \arrow[dd] \\
+                                                                &  &                 \\
+        C_n \arrow[rr]                                          &  & O^n            
+    \end{tikzcd}
+\end{center}
+We call \( \bot \preceq x_i, y_i, \top \preceq \bot' \) the elements of \( O^n \). Consider \( (I^n, dI^n) \) the directed cube \( [0, 1]^n \) whose dipath are the piecewise linear weakly increasing ones. In \( C'_n \), the admissible dipaths are the ones whose \( (z, \theta) \) value is weakly decreasing.
+
+\begin{clem}{Admissible dipaths}{admissible_dipath}
+    A path \( \gamma : [0, 1] \to I^n \) is in \( dI^n \) if and only the map \( t \mapsto (z(t), \theta(t)) \) is weakly increasing while \( z(t) \le \frac12\sqrt{n} \) and the map \( t \mapsto (z(t), -\theta(t)) \) is weakly increasing while \( z(t) \ge \frac12\sqrt{n} \).
+\end{clem}
+\begin{lemproof}{admissible_dipath}
+    Cut the \( n \)-cube \( [0, 1]^n \) along the bisecting hyperplane of the diagonal \( 0^n1^n \) and notice that the bottom part is a directed copy of \( C^n \) and the top part is a directed copy of (a symmetric version of) \( C'_n \). 
+\end{lemproof}
+\begin{ccor}{Realisation of the globes}{realisation_globe}
+    We have
+    \begin{equation*}
+        |O^n|_d \simeq (I^n, dI^n)
+    \end{equation*}
+\end{ccor}
+
+\begin{ccor}{Realisation of the interval}{realisation_interval}
+    The diagrammatic interval \( O^1 \) is realized as the directed interval \( \vec{[0, 1]} \) with weakly increasing paths.
+\end{ccor}
+
+\begin{ccor}{Realisation of the spheres}{realisation_sphere}
+    The sphere \( \partial O^n \) is realized as \( \partial \vec {I^n} = [0, 1]^n \backslash (0, 1)^n \) whose directed paths are the one inherited from \( \vec {I^n} \)
+\end{ccor}
+\begin{corproof}{realisation_sphere}
+    The same applies, except this time we only glue the boundaries of the \( n \) simplices (whose interior is then empty).
+\end{corproof}
+
+\subsection{Gray product}
+
+\begin{clem}{}{gray_prepos}
+    The forgetful functor \( \eye \to \prePos \) sends Gray products to cartesian products.
+\end{clem}
+\begin{lemproof}{gray_prepos}
+    The forgetful functor sends Gray products to cartesian products in \( \Pos \). Moreover, by definition
+    \begin{equation*}
+        x \otimes y \preceq x' \otimes y'
+    \end{equation*} 
+    if and only if \( x \otimes y \in \partial^-_0 x' \otimes y' \) or \( x' \otimes y' \in \partial^+_0 x \otimes y \), but the 0-boundaries commute with Gray products, that is \( \partial^\alpha_0 (U \otimes V) = \partial^\alpha_0 U \otimes \partial^\alpha_0 V \), thus \(  x \otimes y \preceq x' \otimes y' \) if and only if \( x \preceq x' \) and \( y \preceq y' \), giving indeed the cartesian product in \( \prePos \).
+\end{lemproof}
+
+\begin{cprop}{Realisation of Gray products}{realisation_gray}
+    Let \( U, V \in \eye \), then
+    \begin{equation*}
+        |U \otimes V|_d \simeq |U|_d \times |V|_d
+    \end{equation*}
+\end{cprop}
+\begin{propproof}{realisation_gray}
+    First, \( k_d(U \otimes V) = U \times V \) in \( \dsSet \), because the Gray product is sent to the cartesian products by \citelem{gray_prepos}, and the directed nerve functor is right adjoint, thus preserves products. 
+    
+    That means it now suffices to show that the realisation of directed simplicial sets preserves finite products. It is the case for the simplicial sets, thus is suffices to show that the admissible paths of the realisation of the product is the product of the admissible paths of the realisation. This is the case for purely formal reasons. Indeed, as the standard geometric realization preserves products, a point \( x\otimes y \) is realized as the couple \( (|x| ,|y|) \). Thus, the path \( \gamma_{ii', jj'} : (x_i, x_{i'}) \to (x_j, x_{j'}) \) is the path \( (\gamma_{ij}, \gamma_{i'j'}) \). So, for two orderings \( P, Q \), we can write
+    \begin{align*}
+        \sum\limits_{(ij, i'j') \in P \times Q} c_{ij, i'j'} \gamma_{ii', jj'} &= \left(\sum\limits_{(ij, i'j') \in P \times Q} c_{ij, i'j'} \gamma_{ij}, \sum\limits_{(ij, i'j') \in P \times Q} c_{ij, i'j'} \gamma_{i'j'}\right) \\
+        &= \left(\sum\limits_{ij\in P} \left(\sum\limits_{i'j'\in Q} c_{ij, i'j'}\right) \gamma_{ij}, \sum\limits_{i'j'\in Q} \left(\sum\limits_{ij\in P} c_{ij, i'j'}\right) \gamma_{i'j'}\right)
+    \end{align*}
+    and both paths are admissible in their respective spaces. 
+\end{propproof}
+\begin{ccor}{Realisation of the cubes}{realisation_cube}
+    The realisation of the \( n \)-cube is \( [0, 1]^n \) with admissible paths the piecewise linear increasing ones.
+\end{ccor}
+\begin{corproof}{realisation_cube}
+    The \( n \)th cube is defined to be \( O^1 \otimes \dots \otimes O^1 \) \( n \) times, thus by \citeprop{realisation_gray}, its realisation is the \( \vec{I}^n \), which is the cube \( [0, 1]^n \) whose paths are piecewise linear increasing increasing.  
+\end{corproof}
+Notice that we have in \( \dTop \), \( |O^n|_d \simeq |\Box^n|_d \).
+% Notice that, although their underlying topological spaces are homeomorphic, \( |O^n|_d \neq |\Box^n|_d \) as directed topological space, whenever \( n \geq 2 \). We have however an inclusion in \( \dTop \):
+% \begin{equation*}
+%     |O^n|_d \emb |\Box^n|_d
+% \end{equation*}
+% because a piecewise linear weakly increasing path is in particular an increasing path. By approximation results, those two spaces should be proven dihomotopic, indeed any weakly
+% The realisation does not commute directly with the gray product, indeed some orientations are reversed and this it is not true anymore that \( dN(U\otimes V) = dN(U) \times dN(V) \). However, we can define a gray product on \( \prePos \) simply by pasting the definition for diagrammatic sets.
+% \begin{cdef}{Tensor on \( \prePos \)}{tensor_prepos}
+%     Let \( P, Q \) in \( \prePos \), we define \( P \otimes Q \) to be preposetal set \( P \times Q \) whose posetal order \( \le \) is the product order, and the preorder \( \preceq \) is constructed as follows:
+%     For all \( x \) such that \( \dim x = 0 \):
+%     \begin{equation*}
+%         x \otimes y \preceq x \otimes y' \text{ iff } y \preceq y'
+%     \end{equation*}
+
+% \end{cdef}
+
+% \begin{clem}{Realisation of the tensor product}{realisation_tensor}
+%     For any \( X, Y \in \eye\Set \), we have \( |X\otimes Y|_d \simeq |X|_d \times |Y|_d \).  
+% \end{clem}
+% \begin{lemproof}{realisation_tensor}
+%     It follows from the fact that the monoidal structure is closed, thus preserves colimit
+% \end{lemproof}
+
+\subsection{Dihomotopies and reversible paths}
+A diagram of shape \( f : O^1 \to X \) in a diagrammatic set exhibits an admissible dipath \( |f| \in dX \), as it is realized as a map \( |f| : \vec{I} \to |X|_d \), and we have the isomorphism (of topological spaces) \( (|X|_d)^{\vec{I}} \simeq dX \). If \( x : 1 \to X \), we allow ourselves to name \( x \in |X|_d \) the point determined by the map \( |x|_d : 1 \to |X|_d \), thus we have that a diagram of shape \( x \stackrel{f}{\to} y \) in \( X \), it is realized as the concatenation of the paths \( |f| = \gamma_{xf}\cdot\gamma_{fy} \).
+
+\begin{cdef}{Dihomotopies}{dihomotopies}
+    Let \( (X, dX) \) be a directed topological space, and let \( f, g : x \to y \) be two admissible dipaths of \( dX \). A \cemph{dihomotopy} \( \phi : f \to g \) is a continuous map \( \phi : [0, 1] \to dX \) such that \( \phi(0) = f \), \( \phi(1) = g \) and for all \( t \in [0, 1] \), we have \( \phi(t) \in dX \). If there is a dihomotopy \( \phi : f \to g \), we write \( f \sim_d g \). This is an equivalence relation. 
+\end{cdef}
+A dihomotopy is simply a (particular) homotopy between in the space \( dX \), thus is a morphism \( \phi : \vec{I} \times I \to X \) in \( \dTop \).
+\begin{clem}{Diagrams in the realisation}{digrams_real}
+    Let \( X \) be a diagrammatic set. 
+    \begin{enumerate}
+        \item A diagram of shape \( x \stackrel{f}{\to} y \stackrel{g}{\to} z \) in \( X \) is realized as the concatenation of the paths in \( dX \) determined by the subdiagrams \( x \stackrel{f}{\to} y \) and \( y \stackrel{g}{\to} z \).
+        \item A diagram of shape 
+        \begin{center}
+            \begin{tikzcd}
+                x && y
+                \arrow[""{name=0, anchor=center, inner sep=0}, "g", curve={height=-18pt}, from=1-1, to=1-3]
+                \arrow[""{name=1, anchor=center, inner sep=0}, "f"', curve={height=18pt}, from=1-1, to=1-3]
+                \arrow["\alpha"', shorten <=5pt, shorten >=5pt, Rightarrow, from=1, to=0]
+            \end{tikzcd}
+        \end{center}
+        in \( X \) proves that the paths determined by the subdiagrams \( f : O^1 \to X \) and \( g : O^1 \to X \) are dihomotopic. 
+    \end{enumerate}
+\end{clem}
+\begin{lemproof}{digrams_real}
+    The first point is clear as \( |O^1 \#_0O^1|_d = (|O^1|_d \coprod |O^1|_d)/(\partial^+ O^1 = \partial^-O^1) \), thus the diagram of shape \( f;g : O^1 \#_0O^1 \to X \) is indeed the concatenation of two paths and the two inclusions 
+    \begin{center}
+        \begin{tikzcd}
+            O^1 \arrow[rd, "f"'] \arrow[r, hook] & O^1 \#_0O^1 \arrow[d, "f;g"] & O^1 \arrow[l, hook] \arrow[ld, "g"] \\
+                                                 & X                            &                                    
+        \end{tikzcd}
+    \end{center}
+    ensure the equality of the desired paths.
+
+    For the second point, we notice the path \( |f| \) is the concatenation of paths \( \gamma_{xf}\cdot\gamma_{fy} \), and similarly \( |g| =  \gamma_{xg}\cdot\gamma_{gy} \). It suffices to show that the linear interpolation of those two paths via \( \phi(t) = t|f| + (1-t)|g| \) is a dihomotopy. To show that \( \phi(t) \) is a dipath for all \( t \), we can notice that we we can write it as the concatenation:
+    \begin{equation*}
+        \phi(t) = (t\gamma_{xf} + (1-t)\gamma_{xg})\cdot (t\gamma_{fy} + (1-t)\gamma_{fy})
+    \end{equation*}
+    and for all \( t \), both \( t\gamma_{xf} + (1-t)\gamma_{xg} \) and \( t\gamma_{fy} + (1-t)\gamma_{fy} \) constitute admissible dipaths by construction.
+\end{lemproof}
+We could  similarly define the notion of \( \vec I \)-dihomotopy as maps \( \vec I \times \vec I \to X \), but the realisation we are working with will not detect the difference between 
+\begin{center}
+    \begin{tikzcd}
+        x && y
+        \arrow[""{name=0, anchor=center, inner sep=0}, "g", curve={height=-18pt}, from=1-1, to=1-3]
+        \arrow[""{name=1, anchor=center, inner sep=0}, "f"', curve={height=18pt}, from=1-1, to=1-3]
+        \arrow["\alpha"', shorten <=5pt, shorten >=5pt, Rightarrow, from=1, to=0]
+    \end{tikzcd}
+\end{center}
+and 
+\begin{center}
+    \begin{tikzcd}
+        x && y
+        \arrow[""{name=0, anchor=center, inner sep=0}, "g", curve={height=-18pt}, from=1-1, to=1-3]
+        \arrow[""{name=1, anchor=center, inner sep=0}, "f"', curve={height=18pt}, from=1-1, to=1-3]
+        \arrow["\alpha"', shorten <=5pt, shorten >=5pt, Rightarrow, from=0, to=1]
+    \end{tikzcd}
+\end{center}
+and would not allow us to interpolate the paths \( |f| \) and \( |g| \). Indeed, it would require that the paths \( t \mapsto t|f|(u) + (1-t)|g|(u) \) are directed for all \( 0 \le u \le 1 \), but then taking for instance \( u=\frac12 \), we would end up with the path \( \gamma_{f\alpha}\cdot\gamma_{\alpha g} \) that does not belong to the realisation, as we do not have, for instance, \( f \preceq \alpha \) or \( \alpha \preceq f \). 
+
+However, this difference would be detected by the first realisation, and it would be possible to construct \( \vec I \)-dihomotopies \( f \to g \) in the first diagram and \( g \to f \) in the second.
+
+
+\begin{cdef}{Contractible}{contractible}
+    A path \( f : x \to x \) is \cemph{contractible} when there exists a dihomotopy \( \phi : f \to x \), where \( x \) is the constant path at \( x \). 
+    %More generally, a directed space \( (X, dX) \) is contractible whenever \( dX \) is homotopy equivalent to the point.   
+\end{cdef}
+
+\begin{cprop}{Contractible paths}{contractible_path}
+    Let \( X \) be a diagrammatic set, then a diagram of shape 
+    \begin{center}
+        \begin{tikzcd}
+            x && x \\
+            & y
+            \arrow["f"', curve={height=6pt}, from=1-1, to=2-2]
+            \arrow["f^{-1}"', curve={height=6pt}, from=2-2, to=1-3]
+            \arrow[""{name=0, anchor=center, inner sep=0}, "{\veps x}", curve={height=-6pt}, from=1-1, to=1-3]
+            \arrow["", shorten >=4pt, Rightarrow, from=2-2, to=0]
+        \end{tikzcd}
+    \end{center} 
+    in \( X \) proves that the path \( |f|\cdot|f^{-1}| : x \to x \) is contractible, and in \( \Top \), we have \( |f^{-1}| \sim |f|^{-1} \)
+\end{cprop}
+\begin{propproof}{contractible_path}
+    A diagram of shape \( \veps_x = !;x : O^1 \epi 1 \to X \) exhibit a path of \( dX \), and the commutation \( |\veps_x| = !;|x| \) indicates it is constant. By \citelem{digrams_real}, we conclude that the path \( |f|\cdot|f^{-1}| \) is dihomotopic to the constant path at \( x \). Moreover:
+    \begin{align*}
+        &|f|\cdot|f^{-1}| \sim x \\
+        \implies& |f|^{-1}\cdot|f|\cdot|f^{-1}| \sim |f|^{-1}\cdot x \\
+        \implies& |f^{-1}| \sim |f|^{-1}.
+    \end{align*}
+\end{propproof}
+
+\begin{cdef}{Weak dihomotopy equivalence}{dihomotopy_equivalence}
+    Two direct spaces \( (X, dX) \) and \( (Y, dY) \) are \cemph{weakly dihomotopical equivalent} if their paths spaces \( dX \) and \( dY \) are homotopical equivalent.
+\end{cdef}
+\begin{cprop}{}{weak_dh_dimap}
+    Two directed spaces \( (X, dX) \) and \( (Y, dY) \) are weakly dihomotopical equivalent if and only if there exists two dimaps \( f : (X, dX) \to (Y, dY) \) and \( g : (Y, dY) \to (X, dX) \) such that \( f\circ g \sim \id_Y \) and \( g\circ f \sim \id_X \)
+\end{cprop}
+\begin{propproof}{weak_dh_dimap}
+   Suppose \( \Gamma : dX \to dY \) and \( \Gamma' : dY \to dX \) form a homotopy equivalence. In particular, as constant paths are send to constant paths, \( \Gamma \) and \( \Gamma' \) restricts to continuous maps \( \Gamma_0 : X \to Y \) and \( \Gamma'_0 : Y \to X \). Take a path \( \gamma \in dX \), then \( t \mapsto \Gamma_0 (\gamma(t)) = \Gamma \circ \gamma \in dY \), thus \( \Gamma_0 \) is a dimap. Similarly, \( \Gamma' \) is also a dimap. We have \( \Gamma'\Gamma \sim \id_{dX} \), and this homotopy restricts to \( \Gamma'_0\Gamma_0 \sim \id_Y \) by applying it to the constant paths. Similarly \( \Gamma_0\Gamma'_0 \sim \id_Y \).
+    
+    Conversely, suppose we have \( f : (X, dX) \to (Y, dY) \) and \( g : (Y, dY) \to (X, dX) \) such that \( f\circ g \sim \id_Y \) and \( g\circ f \sim \id_X \). We let \( \Gamma = f\circ - \) and \( \Gamma' = g\circ - \) and conclude by \( \Gamma'\Gamma = g \circ f \circ - \sim \id_X \circ - = \id_{dX} \), similarly for \( \Gamma\Gamma' \).
+\end{propproof}
+
+% \begin{cdef}{Homotopy accessible}{homotopy_accessible}
+%     Let \( (X, dX) \) a directed space. A path \( \gamma : [0, 1] \to X \) is \cemph{homotopy admissible} if there exists \( \gamma' \in dX \) such that \( \gamma \sim \gamma' \) \( f : (X, dX) \to (Y, dY) \) is a continuous map \( f : X \to Y \) such that for all \( \gamma \in dX \), there exists an endpoints preserving homotopy \( \phi : f\circ \gamma \to g \) for some \( g \in dY \). Every dimap can be seen as a homotopy dimap.
+% \end{cdef}
+
+
+% Let \( \tilde I \) be the directed interval whose paths are the ones with a finite change of monotonicity, and let \( \tilde O \) be the localisation of the 1-cell of \( O^1 \).
+% \begin{cthm}{}{}
+    
+% \end{cthm}
+% \begin{cdef}{Reversible}{reversible}
+%     A dipath \( \gamma \in dX \) is \cemph{reversible} if it lifts into a map \( \gamma : \tilde I \to X \) in \( \dTop \). 
+% \end{cdef}
+% Notice that paths \( d\tilde I \) are precisely the reversible of \( \tilde I \), notice also that a path \( \gamma \) is reversible if and only if the path \( \gamma^{-1} \defeq t \mapsto \gamma(1-t) \) is admissible.
+
+% \begin{clem}{Criterion for contractibility}{crit_reversibility}
+%     Let \( (X, dX) \) be a directed topological space. If path \( \gamma \in dX \) is reversible then both \( \gamma\cdot\gamma^{-1} \) and \( \gamma^{-1}\cdot\gamma \) are contractible.
+% \end{clem}
+% \begin{lemproof}{crit_reversibility}
+%     If \( \gamma \) is reversible, then the path \( \gamma^{-1} \) exhibit such a \( \gamma' \). Indeed, it belongs to \( dX \), and the concatenations are contractible by reparametrisation of the endpoints.
+% \end{lemproof}
+
+% \begin{ccor}{}{crit_reversibility_diagram}
+%     Let \( X \) be a diagrammatic set. A path \( f : O^1 \to X \) is realizes into a reversible path if and only if there exists a diagram \( g : O^1 \to X \) and two diagrams
+%     \begin{center}
+%         \begin{tikzcd}
+%             x && x \\
+%             & y
+%             \arrow["f"', curve={height=6pt}, from=1-1, to=2-2]
+%             \arrow["g"', curve={height=6pt}, from=2-2, to=1-3]
+%             \arrow[""{name=0, anchor=center, inner sep=0}, "{\veps x}", curve={height=-6pt}, from=1-1, to=1-3]
+%             \arrow["", shorten >=4pt, Rightarrow, from=2-2, to=0]
+%         \end{tikzcd}
+%     \end{center} 
+%     and 
+%     \begin{center}
+%         \begin{tikzcd}
+%             y && y \\
+%             & x
+%             \arrow["g"', curve={height=6pt}, from=1-1, to=2-2]
+%             \arrow["f"', curve={height=6pt}, from=2-2, to=1-3]
+%             \arrow[""{name=0, anchor=center, inner sep=0}, "{\veps x}", curve={height=-6pt}, from=1-1, to=1-3]
+%             \arrow["", shorten >=4pt, Rightarrow, from=2-2, to=0]
+%         \end{tikzcd}
+%     \end{center} 
+%     in \( X \).
+% \end{ccor}
+% \begin{corproof}{crit_reversibility_diagram}
+%     We rewrite \citeprop{contractible_path} and conclude with \citelem{crit_reversibility}.
+% \end{corproof}

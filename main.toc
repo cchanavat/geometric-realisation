@@ -1,0 +1,11 @@
+\contentsline {section}{\numberline {1}Directed simplex category}{1}{section.1}%
+\contentsline {subsection}{\numberline {1.1}Combinatorics and lattice structure}{1}{subsection.1.1}%
+\contentsline {section}{\numberline {2}Geometric realisation}{2}{section.2}%
+\contentsline {subsection}{\numberline {2.1}Directed geometric realisation}{2}{subsection.2.1}%
+\contentsline {subsection}{\numberline {2.2}From combinatorial computad to directed simplicial sets}{3}{subsection.2.2}%
+\contentsline {subsection}{\numberline {2.3}From diagrammatic sets to directed simplicial sets}{4}{subsection.2.3}%
+\contentsline {section}{\numberline {3}Examples}{5}{section.3}%
+\contentsline {subsection}{\numberline {3.1}The cone}{5}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.2}Globe, interval, sphere}{6}{subsection.3.2}%
+\contentsline {subsection}{\numberline {3.3}Gray product}{7}{subsection.3.3}%
+\contentsline {subsection}{\numberline {3.4}Dihomotopies and reversible paths}{8}{subsection.3.4}%
