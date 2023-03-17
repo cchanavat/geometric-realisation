@@ -78,63 +78,44 @@ We call \( \bot \preceq x_i, y_i, \top \preceq \bot' \) the elements of \( O^n \
     The same applies, except this time we only glue the boundaries of the \( n \) simplices (whose interior is then empty).
 \end{corproof}
 
-\subsection{Gray product}
+%%%%%%%%%%%%%%%%%%%%%%%%% This part is false, maybe there is something to save though.
+% \subsection{Gray product}
 
-\begin{clem}{}{gray_prepos}
-    The forgetful functor \( \eye \to \prePos \) sends Gray products to cartesian products.
-\end{clem}
-\begin{lemproof}{gray_prepos}
-    The forgetful functor sends Gray products to cartesian products in \( \Pos \). Moreover, by definition
-    \begin{equation*}
-        x \otimes y \preceq x' \otimes y'
-    \end{equation*} 
-    if and only if \( x \otimes y \in \partial^-_0 x' \otimes y' \) or \( x' \otimes y' \in \partial^+_0 x \otimes y \), but the 0-boundaries commute with Gray products, that is \( \partial^\alpha_0 (U \otimes V) = \partial^\alpha_0 U \otimes \partial^\alpha_0 V \), thus \(  x \otimes y \preceq x' \otimes y' \) if and only if \( x \preceq x' \) and \( y \preceq y' \), giving indeed the cartesian product in \( \prePos \).
-\end{lemproof}
-
-\begin{cprop}{Realisation of Gray products}{realisation_gray}
-    Let \( U, V \in \eye \), then
-    \begin{equation*}
-        |U \otimes V|_d \simeq |U|_d \times |V|_d
-    \end{equation*}
-\end{cprop}
-\begin{propproof}{realisation_gray}
-    First, \( k_d(U \otimes V) = U \times V \) in \( \dsSet \), because the Gray product is sent to the cartesian products by \citelem{gray_prepos}, and the directed nerve functor is right adjoint, thus preserves products. 
-    
-    That means it now suffices to show that the realisation of directed simplicial sets preserves finite products. It is the case for the simplicial sets, thus is suffices to show that the admissible paths of the realisation of the product is the product of the admissible paths of the realisation. This is the case for purely formal reasons. Indeed, as the standard geometric realization preserves products, a point \( x\otimes y \) is realized as the couple \( (|x| ,|y|) \). Thus, the path \( \gamma_{ii', jj'} : (x_i, x_{i'}) \to (x_j, x_{j'}) \) is the path \( (\gamma_{ij}, \gamma_{i'j'}) \). So, for two orderings \( P, Q \), we can write
-    \begin{align*}
-        \sum\limits_{(ij, i'j') \in P \times Q} c_{ij, i'j'} \gamma_{ii', jj'} &= \left(\sum\limits_{(ij, i'j') \in P \times Q} c_{ij, i'j'} \gamma_{ij}, \sum\limits_{(ij, i'j') \in P \times Q} c_{ij, i'j'} \gamma_{i'j'}\right) \\
-        &= \left(\sum\limits_{ij\in P} \left(\sum\limits_{i'j'\in Q} c_{ij, i'j'}\right) \gamma_{ij}, \sum\limits_{i'j'\in Q} \left(\sum\limits_{ij\in P} c_{ij, i'j'}\right) \gamma_{i'j'}\right)
-    \end{align*}
-    and both paths are admissible in their respective spaces. 
-\end{propproof}
-\begin{ccor}{Realisation of the cubes}{realisation_cube}
-    The realisation of the \( n \)-cube is \( [0, 1]^n \) with admissible paths the piecewise linear increasing ones.
-\end{ccor}
-\begin{corproof}{realisation_cube}
-    The \( n \)th cube is defined to be \( O^1 \otimes \dots \otimes O^1 \) \( n \) times, thus by \citeprop{realisation_gray}, its realisation is the \( \vec{I}^n \), which is the cube \( [0, 1]^n \) whose paths are piecewise linear increasing increasing.  
-\end{corproof}
-Notice that we have in \( \dTop \), \( |O^n|_d \simeq |\Box^n|_d \).
-% Notice that, although their underlying topological spaces are homeomorphic, \( |O^n|_d \neq |\Box^n|_d \) as directed topological space, whenever \( n \geq 2 \). We have however an inclusion in \( \dTop \):
-% \begin{equation*}
-%     |O^n|_d \emb |\Box^n|_d
-% \end{equation*}
-% because a piecewise linear weakly increasing path is in particular an increasing path. By approximation results, those two spaces should be proven dihomotopic, indeed any weakly
-% The realisation does not commute directly with the gray product, indeed some orientations are reversed and this it is not true anymore that \( dN(U\otimes V) = dN(U) \times dN(V) \). However, we can define a gray product on \( \prePos \) simply by pasting the definition for diagrammatic sets.
-% \begin{cdef}{Tensor on \( \prePos \)}{tensor_prepos}
-%     Let \( P, Q \) in \( \prePos \), we define \( P \otimes Q \) to be preposetal set \( P \times Q \) whose posetal order \( \le \) is the product order, and the preorder \( \preceq \) is constructed as follows:
-%     For all \( x \) such that \( \dim x = 0 \):
-%     \begin{equation*}
-%         x \otimes y \preceq x \otimes y' \text{ iff } y \preceq y'
-%     \end{equation*}
-
-% \end{cdef}
-
-% \begin{clem}{Realisation of the tensor product}{realisation_tensor}
-%     For any \( X, Y \in \eye\Set \), we have \( |X\otimes Y|_d \simeq |X|_d \times |Y|_d \).  
+% \begin{clem}{}{gray_prepos}
+%     The forgetful functor \( \eye \to \prePos \) sends Gray products to cartesian products.
 % \end{clem}
-% \begin{lemproof}{realisation_tensor}
-%     It follows from the fact that the monoidal structure is closed, thus preserves colimit
+% \begin{lemproof}{gray_prepos}
+%     The forgetful functor sends Gray products to cartesian products in \( \Pos \). Moreover, by definition
+%     \begin{equation*}
+%         x \otimes y \preceq x' \otimes y'
+%     \end{equation*} 
+%     if and only if \( x \otimes y \in \partial^-_0 x' \otimes y' \) or \( x' \otimes y' \in \partial^+_0 x \otimes y \), but the 0-boundaries commute with Gray products, that is \( \partial^\alpha_0 (U \otimes V) = \partial^\alpha_0 U \otimes \partial^\alpha_0 V \), thus \(  x \otimes y \preceq x' \otimes y' \) if and only if \( x \preceq x' \) and \( y \preceq y' \), giving indeed the cartesian product in \( \prePos \).
 % \end{lemproof}
+
+% \begin{cprop}{Realisation of Gray products}{realisation_gray}
+%     Let \( U, V \in \eye \), then
+%     \begin{equation*}
+%         |U \otimes V|_d \simeq |U|_d \times |V|_d
+%     \end{equation*}
+% \end{cprop}
+% \begin{propproof}{realisation_gray}
+%     First, \( k_d(U \otimes V) = U \times V \) in \( \dsSet \), because the Gray product is sent to the cartesian products by \citelem{gray_prepos}, and the directed nerve functor is right adjoint, thus preserves products. 
+    
+%     That means it now suffices to show that the realisation of directed simplicial sets preserves finite products. It is the case for the simplicial sets, thus is suffices to show that the admissible paths of the realisation of the product is the product of the admissible paths of the realisation. This is the case for purely formal reasons. Indeed, as the standard geometric realization preserves products, a point \( x\otimes y \) is realized as the couple \( (|x| ,|y|) \). Thus, the path \( \gamma_{ii', jj'} : (x_i, x_{i'}) \to (x_j, x_{j'}) \) is the path \( (\gamma_{ij}, \gamma_{i'j'}) \). So, for two orderings \( P, Q \), we can write
+%     \begin{align*}
+%         \sum\limits_{(ij, i'j') \in P \times Q} c_{ij, i'j'} \gamma_{ii', jj'} &= \left(\sum\limits_{(ij, i'j') \in P \times Q} c_{ij, i'j'} \gamma_{ij}, \sum\limits_{(ij, i'j') \in P \times Q} c_{ij, i'j'} \gamma_{i'j'}\right) \\
+%         &= \left(\sum\limits_{ij\in P} \left(\sum\limits_{i'j'\in Q} c_{ij, i'j'}\right) \gamma_{ij}, \sum\limits_{i'j'\in Q} \left(\sum\limits_{ij\in P} c_{ij, i'j'}\right) \gamma_{i'j'}\right)
+%     \end{align*}
+%     and both paths are admissible in their respective spaces. 
+% \end{propproof}
+% \begin{ccor}{Realisation of the cubes}{realisation_cube}
+%     The realisation of the \( n \)-cube is \( [0, 1]^n \) with admissible paths the piecewise linear increasing ones.
+% \end{ccor}
+% \begin{corproof}{realisation_cube}
+%     The \( n \)th cube is defined to be \( O^1 \otimes \dots \otimes O^1 \) \( n \) times, thus by \citeprop{realisation_gray}, its realisation is the \( \vec{I}^n \), which is the cube \( [0, 1]^n \) whose paths are piecewise linear increasing increasing.  
+% \end{corproof}
+% Notice that we have in \( \dTop \), \( |O^n|_d \simeq |\Box^n|_d \).
+%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \subsection{Dihomotopies and reversible paths}
 A diagram of shape \( f : O^1 \to X \) in a diagrammatic set exhibits an admissible dipath \( |f| \in dX \), as it is realized as a map \( |f| : \vec{I} \to |X|_d \), and we have the isomorphism (of topological spaces) \( (|X|_d)^{\vec{I}} \simeq dX \). If \( x : 1 \to X \), we allow ourselves to name \( x \in |X|_d \) the point determined by the map \( |x|_d : 1 \to |X|_d \), thus we have that a diagram of shape \( x \stackrel{f}{\to} y \) in \( X \), it is realized as the concatenation of the paths \( |f| = \gamma_{xf}\cdot\gamma_{fy} \).
@@ -226,17 +207,17 @@ However, this difference would be detected by the first realisation, and it woul
     \end{align*}
 \end{propproof}
 
-\begin{cdef}{Weak dihomotopy equivalence}{dihomotopy_equivalence}
-    Two direct spaces \( (X, dX) \) and \( (Y, dY) \) are \cemph{weakly dihomotopical equivalent} if their paths spaces \( dX \) and \( dY \) are homotopical equivalent.
-\end{cdef}
-\begin{cprop}{}{weak_dh_dimap}
-    Two directed spaces \( (X, dX) \) and \( (Y, dY) \) are weakly dihomotopical equivalent if and only if there exists two dimaps \( f : (X, dX) \to (Y, dY) \) and \( g : (Y, dY) \to (X, dX) \) such that \( f\circ g \sim \id_Y \) and \( g\circ f \sim \id_X \)
-\end{cprop}
-\begin{propproof}{weak_dh_dimap}
-   Suppose \( \Gamma : dX \to dY \) and \( \Gamma' : dY \to dX \) form a homotopy equivalence. In particular, as constant paths are send to constant paths, \( \Gamma \) and \( \Gamma' \) restricts to continuous maps \( \Gamma_0 : X \to Y \) and \( \Gamma'_0 : Y \to X \). Take a path \( \gamma \in dX \), then \( t \mapsto \Gamma_0 (\gamma(t)) = \Gamma \circ \gamma \in dY \), thus \( \Gamma_0 \) is a dimap. Similarly, \( \Gamma' \) is also a dimap. We have \( \Gamma'\Gamma \sim \id_{dX} \), and this homotopy restricts to \( \Gamma'_0\Gamma_0 \sim \id_Y \) by applying it to the constant paths. Similarly \( \Gamma_0\Gamma'_0 \sim \id_Y \).
+% \begin{cdef}{Weak dihomotopy equivalence}{dihomotopy_equivalence}
+%     Two direct spaces \( (X, dX) \) and \( (Y, dY) \) are \cemph{weakly dihomotopical equivalent} if their paths spaces \( dX \) and \( dY \) are homotopical equivalent.
+% \end{cdef}
+% \begin{cprop}{}{weak_dh_dimap}
+%     Two directed spaces \( (X, dX) \) and \( (Y, dY) \) are weakly dihomotopical equivalent if and only if there exists two dimaps \( f : (X, dX) \to (Y, dY) \) and \( g : (Y, dY) \to (X, dX) \) such that \( f\circ g \sim \id_Y \) and \( g\circ f \sim \id_X \)
+% \end{cprop}
+% \begin{propproof}{weak_dh_dimap}
+%    Suppose \( \Gamma : dX \to dY \) and \( \Gamma' : dY \to dX \) form a homotopy equivalence. In particular, as constant paths are send to constant paths, \( \Gamma \) and \( \Gamma' \) restricts to continuous maps \( \Gamma_0 : X \to Y \) and \( \Gamma'_0 : Y \to X \). Take a path \( \gamma \in dX \), then \( t \mapsto \Gamma_0 (\gamma(t)) = \Gamma \circ \gamma \in dY \), thus \( \Gamma_0 \) is a dimap. Similarly, \( \Gamma' \) is also a dimap. We have \( \Gamma'\Gamma \sim \id_{dX} \), and this homotopy restricts to \( \Gamma'_0\Gamma_0 \sim \id_Y \) by applying it to the constant paths. Similarly \( \Gamma_0\Gamma'_0 \sim \id_Y \).
     
-    Conversely, suppose we have \( f : (X, dX) \to (Y, dY) \) and \( g : (Y, dY) \to (X, dX) \) such that \( f\circ g \sim \id_Y \) and \( g\circ f \sim \id_X \). We let \( \Gamma = f\circ - \) and \( \Gamma' = g\circ - \) and conclude by \( \Gamma'\Gamma = g \circ f \circ - \sim \id_X \circ - = \id_{dX} \), similarly for \( \Gamma\Gamma' \).
-\end{propproof}
+%     Conversely, suppose we have \( f : (X, dX) \to (Y, dY) \) and \( g : (Y, dY) \to (X, dX) \) such that \( f\circ g \sim \id_Y \) and \( g\circ f \sim \id_X \). We let \( \Gamma = f\circ - \) and \( \Gamma' = g\circ - \) and conclude by \( \Gamma'\Gamma = g \circ f \circ - \sim \id_X \circ - = \id_{dX} \), similarly for \( \Gamma\Gamma' \).
+% \end{propproof}
 
 % \begin{cdef}{Homotopy accessible}{homotopy_accessible}
 %     Let \( (X, dX) \) a directed space. A path \( \gamma : [0, 1] \to X \) is \cemph{homotopy admissible} if there exists \( \gamma' \in dX \) such that \( \gamma \sim \gamma' \) \( f : (X, dX) \to (Y, dY) \) is a continuous map \( f : X \to Y \) such that for all \( \gamma \in dX \), there exists an endpoints preserving homotopy \( \phi : f\circ \gamma \to g \) for some \( g \in dY \). Every dimap can be seen as a homotopy dimap.
