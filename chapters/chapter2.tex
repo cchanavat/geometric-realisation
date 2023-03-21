@@ -1,4 +1,4 @@
-\section{Geometric realisation}
+\section{From diagrammatic sets to directed simplicial sets}
 
 \subsection{Directed geometric realisation}
 
@@ -6,35 +6,7 @@ In this section, we describe how to realize a combinatorial computad (atoms + in
 
 We want to turn a directed semi-simplicial set into a directed topological space. For that, we realize the underlying semi-simplicial set the usual way, and we add a set of paths according to the ordering.  
 
-\begin{cdef}{d-spaces and d-maps}{d_space}
-    A \cemph{d-space} \( (X, dX) \) is a topological space together with a set \( dX \) of dipaths such that:
-    \begin{enumerate}
-        \item every constant path is a dipath,
-        \item If \( \phi : [0, 1] \to [0, 1] \) is a directed partial reparametrisation (i.e. weakly increasing), then \( f \circ \phi \) is a dipath for all \( f \in dX \),
-        \item The concatenation of two dipaths is a dipath. 
-    \end{enumerate}
-    A \cemph{d-map} (or dimap) \( f : (X, dX) \to (Y, dY) \) is a continuous map such that for all \( h \in dX \), \( f \circ h \in dY \). This gathers into the category \( \dTop \).
-\end{cdef}
-
 If \( x_i, x_j \) are points in \( \bbR \), we call \( \gamma_{ij} \) the path defined by \( \gamma_{ij}(t) = tx_i + (1-t)x_j \).
-
-\begin{cdef}{Directed geometric realisation}{geom_real}
-    The \cemph{directed geometric realisation} of an element \( ([n], P) \in \dDelta \) is the directed topological space \( (\Delta^n, dP) \) where \( \Delta^n \) is the convex hull spanned by \( n + 1 \) affine independent points \( x_0, \dots, x_n \) of \( \bbR^{n+1} \), and \( dP \) is the closure under concatenation and reparametrisation of the set of paths:
-    \begin{equation*}
-        \{ \sum_{(i,j) \in P} c_{ij} \gamma_{ij} \mid \sum_{(i,j) \in P} c_{ij} = 1 \}
-    \end{equation*}
-\end{cdef}
-The directed geometric realisation has underlying topological space the standard geometric realisation. The set \( dP \) forms a set of dipaths. Indeed by definition it is closed under concatenation and reparametrisation. It also contains all the constant path, as if \( x \) is in \( \Delta^n \), then \( x = \sum_{i=0}^n c_ix_i \) with \( \sum_{i=0}^n c_i = 1 \), thus by setting \( c_{ij} = 0 \) if \( i \neq j \) and \( c_{ij} = c_i \) if \( i = j \), and by noticing that \( P \) is reflexive, we obtain the constant path at \( x \). To make it a functor \( |\dash|_d : \dDelta \to \dTop \), we only need to check that the underlying continuous maps from the standard simplex lifts to maps of directed topological space. Consider \( f : ([n], P) \to ([m], Q) \), and take \( \gamma = \sum_{(i,j) \in P} c_{ij} \gamma_{ij} \) in \( dP \). We want to show that \( |f|\gamma \) is in \( dQ \). By definition, \( |f| \) distributes over barycentric combinations, and \( |f|\gamma_{ij} = \gamma_{f(i)f(j)} \). For \( (i, j) \in Q \), set
-\begin{equation*}
-    c'_{ij} = \sum_{(k, l) \in f^{-1}(i, j)} c_{kl}
-\end{equation*}
-where \( f^{-1}(i, j) \) is shorthand for \( (f^{-1}(i)\times f^{-1}(j))\cap P \), and 
-\begin{equation*}
-    |f| \circ \gamma = \sum_{(k,l) \in P} c_{kl} \gamma_{f(k)f(l)} =  \sum_{(i,j) \in Q} c'_{ij} \gamma_{ij} 
-\end{equation*}
-with \( \sum_{(i,j) \in Q} c'_{ij} = \sum_{(k,l) \in P} c_{kl} = 1 \), as \( f(P) \subseteq Q \). Thus, \( |f| \circ \gamma \) is an admissible path of \( dQ \).
-
-We can left-Kan extend this construction and obtain a functor \( |\dash|_{d\Delta} : \dsSet \to \dTop \).
 
 \subsection{From combinatorial computad to directed simplicial sets}
 
