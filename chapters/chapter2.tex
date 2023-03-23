@@ -59,79 +59,100 @@ Composing with \( \dirgeo{-} \) will then produce a realisation functor valued i
     \end{tikzcd}
 \end{center}
 Both of these will have the geometric realisation described in \cite[Section 8.3]{hadzihasanovic_diagrammatic_2020} as underlying functor.
+Just as the definition of that functor goes through the simplicial nerve of posets, our definition will go through a ``directed'' version of this nerve.
 
 \begin{cdef}{Direction on a poset}{direction_on_poset}
-	A \emph{direction} on a poset \( P \) is a reflexive relation \( \direc \) on the underlying set of \( P \).
+	A \cemph{direction on a poset} \( P \) is a reflexive relation \( \direc \) on the underlying set of \( P \).
 	We let \( \dPos \) be the category of dependent pairs \( (P, \direc) \) where \( P \) is a poset and \( \direc \) a direction on \( P \), together with maps preserving both the order and the direction.
 \end{cdef}
 
-\subsection{Realisation of diagrammatic sets}
+We have an obvious inclusion \( \dDelta \hookrightarrow \dPos \).
 
-In this part, we study a different version of the geometric realisation of diagrammatic sets. We will take the same approach as in the previous section, but we will have to deal with surjective maps between molecules, and thus we will need to take more care when constructing the forgetful functor to \( \prePos \). We notice that we can leave unchanged the \citedef{geom_real} on geometric realisation, as the proof of functoriality equally applies if we add degeneracies. What breaks is the construction of the preorder \( \preceq \), that does not behave functorialy as the surjections do not preserve orientations in general. Thus, we will adapt it here. 
-
-We aim to construct a functor \( \U : \eye \to \prePos \). For that we consider \( V \in \eye \), and as usual, we associate it its underlying poset \( (\H V, \le) \). Now, the preorder is the reflexive and transitive closure of the relation given by:
-\begin{equation*}
-    x \preceq y \iff x \in \partial^-_0 y \text{ or } y \in \partial^+_0 x
-\end{equation*}
-That is whenever \( x \preceq y \) (and \( x \neq y \)), then \( x \) or \( y \) is a point (or both by transitivity). Now, a map \( f : P \to Q \) of \( \eye \) satisfies in particular 
-\begin{equation*}
-    \partial^\alpha_0f(x) = f(\partial^\alpha_0 x) 
-\end{equation*}
-for all \( x \in P \), thus if \(  x \in \partial^-_0 y \), then \(  f(x) \in \partial^-_0 f(y) \), making \( \U \) a functor \( \eye \to \prePos \). We now have the same picture as previously
-\begin{center}
-    \begin{tikzcd}
-        \eye\Sets \arrow[rrrrrrd, "|\dash|_d \defeq \Lan_\y(|k_d\dash|_{d\Delta})", bend left]                                                                            &  &                                             &  &                                                              &  &                          \\
-                    &  & \prePos \arrow[dd, dashed] \arrow[rr, "dN"] &  & \dsSet \arrow[dd, "\iota^*"] \arrow[rr, "|\dash|_{d\Delta}"] &  & \dTop \arrow[dd, dashed] \\
-        \eye \arrow[rrrrd, "k"', bend right=49] \arrow[rrrru, "k_d", bend left=49] \arrow[rru, dashed] \arrow[rrd, dashed] \arrow[uu, "\y", hook] \arrow[dd, "\y"', hook] &  &                                             &  &                                                              &  &                          \\
-        &  & \Pos \arrow[rr, "N"']                       &  & \sSet \arrow[rr, "|\dash|_\Delta"']                          &  & \Top                     \\
-        \eye\Sets \arrow[rrrrrru, "|\dash|\defeq \Lan_\y(|k\dash|_\Delta)"',  bend right]    &  & &  &   &  &                         
-        \end{tikzcd}
-\end{center}
-with the whole category of diagrammatic sets.
-\subsection{Realisation of combinatorial computads}
-
-We call \( \eye_i \) the skeleton of the category of combinatorial computad, that is atoms and inclusions. We have the following picture:
-\begin{center}
-    \begin{tikzcd}
-        && \dDelta && \dTop \\
-        \\
-        \eye_i && \dsSet \\
-        \\
-        \eye_i\Sets
-        \arrow["{|\dash|_{\dDelta}}", from=1-3, to=1-5]
-        \arrow["\y"', hook, from=1-3, to=3-3]
-        \arrow["\y"', hook, from=3-1, to=5-1]
-        \arrow["{?}", dashed, from=3-1, to=3-3]
-        \arrow["{\Lan_\y(?)}"', from=5-1, to=3-3]
-        \arrow["{|\dash|_{d\Delta}}"', from=3-3, to=1-5]
-    \end{tikzcd}
-\end{center}
-We would like to find the dashed functor, thus giving a geometric realization of a diagrammatic set. For that, recall from \cite{hadzihasanovic_diagrammatic_2020} that we have a functor:
-\begin{equation*}
-    k : \eye_i \to \sSet
-\end{equation*} 
-sending a molecule \( U \) to the simplicial nerve of its underlying poset. If \( U \) was already a simplex, it would correspond to constructing its barycentric subdivision. We would like to extend it to a functor \( k_d : \eye_i \to \dsSet \). As \( \Delta \subseteq \dDelta \), we already have a functor \( \sSet \to \dsSet \), however doing so would lose all the relevant information about the orientation of the diagram \( U \) in \( \eye_i \) that we try to convey. Thus, we need to refine the functor \( k \), by adding manually orientations. To that end, we introduce the intermediate category of preordered posets.
-
-\begin{cdef}{Preordered poset}{preordered_poset}
-    A \cemph{preordered poset} is a triple \( (P, \le, \preceq) \) where \( (P, \le) \) is a poset and \( (P, \preceq) \) is a preorder. A map \( f :  (P, \le, \preceq) \to  (Q, \le, \preceq) \) is a map respecting both the poset and the preorder structure. This form the category \( \prePos \).
+\begin{cdef}{Directed simplicial nerve of posets}{directed_simplicial_nerve}
+	The \cemph{directed simplicial nerve of posets} is the right adjoint \( dN\colon \dPos \to \dsSet \) in the realisation-nerve pair induced by the inclusion \( \dDelta \hookrightarrow \dPos \).
 \end{cdef}
 
-We have a forgetful functor \( \prePos \to \Pos \) and another \( \eye_i \to \Pos \). We now describe how to factorize them via another forgetful functor from \( \U : \eye_i \to \prePos \). Let \( V \) be an atom, we define \( \U V \defeq (\H U, \le, \preceq)  \), where the posetal structure is the one of its Hasse diagram, and the preorder is the transitive and reflexive closure of the relation given by:
+Explicitly, given a poset with direction \( (P, \direcalt) \), an \( n \)-simplex with direction \( \direc \) in \( dN(P, \direcalt) \) is given by a chain
 \begin{equation*}
-    x \preceq y \iff o(x \leftarrow y) = - \text{ or } o(y \leftarrow x) = +
-\end{equation*}   
-As inclusions preserve orientation, this construction is functorial. We may now construct the directed nerve functor \( dN : \prePos \to \dsSet \). Let \( (X, \le, \preceq) \) in \( \prePos \). We define \( dN(X)([n], P) \) to be the set of \( (n+1) \) chains \( (x_0 \le \dots \le x_n ) \) (like in the ordinary nerve) that are moreover such that for all \( (i, j) \in P \), we have \( x_i \preceq x_j \). We call \( k_d : \eye_i \to \dsSet \) the functor \( dN \circ \U \).
+	(x_0 \leq \ldots \leq x_n)
+\end{equation*}
+of length \( n \) in \( P \) such that \( i \direc j \) implies \( x_i \direcalt x_j \) for all \( i, j \in [n] \).
 
-We summarize our constructions with the following diagram where everything commutes. A dashed arrow indicates a forgetful functor.
+To conclude, it will suffice to define a functor \( \eye \to \dPos \) or a functor \( \eyein \to \dPos \).
+
+
+\subsection{Realisation of diagrammatic sets}
+
+The realisation functor for diagrammatic sets will be induced by the functor
+\begin{equation*}
+	\U_1\colon \eye \to \dPos
+\end{equation*}
+sending an atom \( V \) to its underlying poset with the direction defined by
+\begin{equation*}
+	x \direc y \iff x = y \text{ or } x \in \bound{0}{-}y \text{ or } y \in \bound{0}{+}x.
+\end{equation*}
+This relation is reflexive by definition.
+If \( f\colon U \to V \) is a map of atoms, it is proven in \cite[Lemma 1.9]{hadzihasanovic_diagrammatic_2020} that it is an order-preserving map of the underlying posets.
+Moreover, by definition of maps, \( f(\bound{0}{\alpha}x) = \bound{0}{\alpha}f(x) \) for all \( x \in U, \alpha \in \{ +, - \} \), so \( x \direc y \) implies \( f(x) \direc f(y) \).
+This proves that \( \U_1 \) is well-defined as a functor.
+
+The following diagram summarises the construction of this directed geometric realisation and its relation to the ``undirected'' realisation.
+
 \begin{center}
     \begin{tikzcd}
-        \eye_i\Sets \arrow[rrrrrrd, "|\dash|_d \defeq \Lan_\y(|k_d\dash|_{d\Delta})", bend left]                                                                            &  &                                             &  &                                                              &  &                          \\
-                    &  & \prePos \arrow[dd, dashed] \arrow[rr, "dN"] &  & \dsSet \arrow[dd, "\iota^*"] \arrow[rr, "|\dash|_{d\Delta}"] &  & \dTop \arrow[dd, dashed] \\
-        \eye_i \arrow[rrrrd, "k"', bend right=49] \arrow[rrrru, "k_d", bend left=49] \arrow[rru, dashed] \arrow[rrd, dashed] \arrow[uu, "\y", hook] \arrow[dd, "\y"', hook] &  &                                             &  &                                                              &  &                          \\
+	    \dgmSet \arrow[rrrrrrd, "{\dirgeodgm{-} \defeq \Lan_\y(\dirgeo{k_1})}", bend left]                                                                            &  &                                             &  &                                                              &  &                          \\
+																					&  & \dPos \arrow[dd, dashed] \arrow[rr, "dN"] &  & \dsSet \arrow[dd, "\iota^*"] \arrow[rr, "\dirgeo{-}"] &  & \dTop \arrow[dd, dashed] \\
+        \eye \arrow[rrrrd, "k"', bend right=49] \arrow[rrrru, "k_1", bend left=49] \arrow[rru, "\U_1"] \arrow[rrd, dashed] \arrow[uu, "\y", hook] \arrow[dd, "\y"', hook] &  &                                             &  &                                                              &  &                          \\
         &  & \Pos \arrow[rr, "N"']                       &  & \sSet \arrow[rr, "|\dash|_\Delta"']                          &  & \Top                     \\
-        \eye_i\Sets \arrow[rrrrrru, "|\dash|\defeq \Lan_\y(|k\dash|_\Delta)"',  bend right]    &  & &  &   &  &                         
+        \dgmSet \arrow[rrrrrru, "|\dash|\defeq \Lan_\y(|k\dash|_\Delta)"',  bend right]    &  & &  &   &  &                         
         \end{tikzcd}
 \end{center}
 
+\subsection{Realisation of combinatorial computads}
 
+The realisation defined in the previous section only cares about ``direction in dimension 1'': reversing \( n \)-cells for any \( n > 1 \) results in the same d-space up to isomorphism.
 
+In this section we will define a realisation functor which also encodes higher-dimensional directions via the existence of dipaths.
+However this realisation is incompatible with the presence of \emph{collapsing} maps of atoms, as it is possible, in diagrammatic sets, to collapse a pair of cells one of which is in the input boundary of the other to a pair of lower-dimensional cells one of which is in the output boundary of the other.
+This produces an illegal ``inversion'' if directions in all dimensions are encoded via directed paths.
+
+For this reason, this realisation only extends functorially to \emph{inclusions} of atoms, hence determining a functor on combinatorial computads rather than diagrammatic sets.
+
+\begin{cdef}{Oriented Hasse diagram}{oriented_hasse}
+Let \( U \) be an atom.
+The \cemph{oriented Hasse diagram of \( U \)} is the directed graph \( \hasseo{U} \) whose
+\begin{itemize}
+    \item set of vertices is the underlying set of \( U \), and
+    \item for all vertices \( x, y \), there is an edge from \( y \) to \( x \) if and only if \( y \in \faces{}{-}x \) or \( x \in \faces{}{+}y \).
+\end{itemize}
+\end{cdef}
+
+The realisation functor for combinatorial computads will be induced by the functor
+\begin{equation*}
+	\U_\infty\colon \eyein \to \dPos
+\end{equation*}
+sending an atom \( V \) to its underlying poset with the direction defined by
+\begin{equation*}
+	x \direc y \iff 
+	\text{ there is an upward or downward path from \( x \) to \( y \) in \( \hasseo{U} \), }
+\end{equation*}
+where by upward and downward we mean ``increasing or decreasing in dimension'' (``zig-zag'' paths are not allowed).
+
+This relation is clearly reflexive.
+By \cite[Lemma 1.11]{hadzihasanovic_diagrammatic_2020}, inclusions of atoms preserve dimensions, orientations, and the covering relation, so they induce embeddings of oriented Hasse diagrams.
+This implies that \( \U_\infty \) is well-defined as a functor.
+
+The following diagram summarises this alternative directed realisation.
+
+\begin{center}
+    \begin{tikzcd}
+	    \CComp \arrow[rrrrrrd, "{\dirgeocomp{-} \defeq \Lan_\y(\dirgeo{k_\infty})}", bend left]                                                                            &  &                                             &  &                                                              &  &                          \\
+																					&  & \dPos \arrow[dd, dashed] \arrow[rr, "dN"] &  & \dsSet \arrow[dd, "\iota^*"] \arrow[rr, "\dirgeo{-}"] &  & \dTop \arrow[dd, dashed] \\
+        \eyein \arrow[rrrrd, "k"', bend right=49] \arrow[rrrru, "k_\infty", bend left=49] \arrow[rru, "\U_\infty"] \arrow[rrd, dashed] \arrow[uu, "\y", hook] \arrow[dd, "\y"', hook] &  &                                             &  &                                                              &  &                          \\
+        &  & \Pos \arrow[rr, "N"']                       &  & \sSet \arrow[rr, "|\dash|_\Delta"']                          &  & \Top                     \\
+        \CComp \arrow[rrrrrru, "|\dash|\defeq \Lan_\y(|k\dash|_\Delta)"',  bend right]    &  & &  &   &  &                         
+        \end{tikzcd}
+\end{center}
+
+We note that a simpler alternative to this construction would be to take the \emph{(directed) reachability relation} on the oriented Hasse diagram of an atom (that is, also allow ``zig-zag'' paths).
+However, this has the consequence that, whenever there is a loop in the oriented Hasse diagram, which tends to happen from dimension 3 onward, every 1-simplex on the path traced by this loop is made reversible, which seems to produce a somewhat less interesting result.
