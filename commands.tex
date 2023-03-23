@@ -4,7 +4,8 @@
 \DeclareMathOperator{\Dgm}{Dgm}
 \DeclareMathOperator*{\Lan}{Lan}
 \renewcommand{\d}{\mathrm{d}}
-\newcommand\eye{\ensurestackMath{\stackinset{c}{}{c}{.3em}{\cdot}{\odot}}}
+\newcommand\eye{\odot}
+\newcommand\eyein{\eye_\textit{in}}
 
 \newcommand{\bbR}{\mathbb{R}}
 \newcommand{\bbN}{\mathbb{N}}
@@ -20,10 +21,20 @@
 \newcommand{\sSet}{\mathbf{sSet}}
 \renewcommand{\P}{\cal{P}}
 \newcommand{\prePos}{\mathbf{prePos}}
+\newcommand{\dPos}{\mathbf{dPos}}
 \newcommand{\Pos}{\mathbf{Pos}}
+\newcommand{\dgmSet}{\eye\mathbf{Set}}
+\newcommand{\CComp}{\mathbf{CComp}}
 
 \renewcommand{\H}{\mathcal{H}}
 
 \newcommand{\apath}{\rightsquigarrow}
 
 \newcommand{\dirgeo}[1]{|#1|_\textit{d}}
+
+\newcommand\bound[2]{\partial_{#1}^{#2}}
+\newcommand\faces[2]{\Delta_{#1}^{#2}}
+\newcommand\cofaces[2]{\nabla_{#1}^{#2}}
+
+\newcommand\direc{\rightsquigarrow}
+\newcommand\direcalt{\looparrowright}

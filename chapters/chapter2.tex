@@ -1,14 +1,94 @@
 \section{From diagrammatic sets to directed simplicial sets}
 
-\subsection{Directed geometric realisation}
+\subsection{Basic definitions}
 
-In this section, we describe how to realize a combinatorial computad (atoms + inclusions) into a directed topological space. The need to realize only the atoms, rather than all the category of diagrammatic sets comes from the absence of good functorial properties from the map we will describe below, in the presence of surjections between diagrams. Moreover, without the surjections, we consider the category \( \dDelta \) to be the directed semi-simplicial category, meaning that it is generated only by the maps \( \delta_i \) with the equation \( \delta_i\delta_j = \delta_{j+1}\delta_i \) whenever \( i \le j \). This is not too much of a restriction as Simon Henry's work on weak model structures shows that one can do homotopy theory just fine in this way. All the results of the previous section also apply.
+We refer to \cite{hadzihasanovic_diagrammatic_2020} and \cite{hadzihasanovic_data_2022} for the basics of oriented graded posets and regular molecules.
 
-We want to turn a directed semi-simplicial set into a directed topological space. For that, we realize the underlying semi-simplicial set the usual way, and we add a set of paths according to the ordering.  
+\begin{cdef}{Diagrammatic sets}{diagrammatic_sets}
+	A \cemph{diagrammatic set} is a presheaf on the category \( \eye \) whose
+	\begin{itemize}
+		\item objects are \emph{atoms} \( U \) of arbitrary dimension,
+		\item morphisms \( f\colon U \to V \) are \emph{maps} of oriented graded posets, that is, functions satisfying
+			\begin{equation*}
+				f(\bound{n}{\alpha}x) = \bound{n}{\alpha}f(x)
+			\end{equation*}
+		for all \( x \in U, n \in \mathbb{N}, \alpha \in \{ +, - \} \).
+	\end{itemize}
+	Diagrammatic sets and their morphisms of presheaves form a category \( \dgmSet \).
+\end{cdef}
 
-If \( x_i, x_j \) are points in \( \bbR \), we call \( \gamma_{ij} \) the path defined by \( \gamma_{ij}(t) = tx_i + (1-t)x_j \).
+\begin{cdef}{Combinatorial computads}{combinatorial_computads}
+	A \cemph{combinatorial computad} is a presheaf on the wide subcategory \( \eyein \) of \( \eye \) whose morphisms are \emph{inclusions}, that is, injective maps.
 
-\subsection{From combinatorial computad to directed simplicial sets}
+	Combinatorial computads and their morphisms of presheaves form a category \( \CComp \).
+\end{cdef}
+
+We will define two realisation functors valued in directed simplicial sets:
+\begin{enumerate}
+	\item the first from diagrammatic sets,
+	\item the second from combinatorial computads.
+\end{enumerate}
+In both cases, we will do this by first defining a functor from their site of definition, namely, \( \eye \) and \( \eyein \), respectively, then taking a left Kan extension along the Yoneda embedding.
+Composing with \( \dirgeo{-} \) will then produce a realisation functor valued in d-spaces, as in the following picture.
+\begin{center}
+    \begin{tikzcd}
+        && \dDelta && \dTop \\
+        \\
+        \eye && \dsSet \\
+        \\
+        \dgmSet
+	\arrow["{\dirgeo{-}}", from=1-3, to=1-5]
+        \arrow["\y"', hook, from=1-3, to=3-3]
+        \arrow["\y"', hook, from=3-1, to=5-1]
+        \arrow["{?}", dashed, from=3-1, to=3-3]
+        \arrow["{\Lan_\y(?)}"', from=5-1, to=3-3]
+	\arrow["{\dirgeo{-}}"', from=3-3, to=1-5]
+    \end{tikzcd}
+    \begin{tikzcd}
+        && \dDelta && \dTop \\
+        \\
+        \eyein && \dsSet \\
+        \\
+        \CComp
+	\arrow["{\dirgeo{-}}", from=1-3, to=1-5]
+        \arrow["\y"', hook, from=1-3, to=3-3]
+        \arrow["\y"', hook, from=3-1, to=5-1]
+        \arrow["{?}", dashed, from=3-1, to=3-3]
+        \arrow["{\Lan_\y(?)}"', from=5-1, to=3-3]
+	\arrow["{\dirgeo{-}}"', from=3-3, to=1-5]
+    \end{tikzcd}
+\end{center}
+Both of these will have the geometric realisation described in \cite[Section 8.3]{hadzihasanovic_diagrammatic_2020} as underlying functor.
+
+\begin{cdef}{Direction on a poset}{direction_on_poset}
+	A \emph{direction} on a poset \( P \) is a reflexive relation \( \direc \) on the underlying set of \( P \).
+	We let \( \dPos \) be the category of dependent pairs \( (P, \direc) \) where \( P \) is a poset and \( \direc \) a direction on \( P \), together with maps preserving both the order and the direction.
+\end{cdef}
+
+\subsection{Realisation of diagrammatic sets}
+
+In this part, we study a different version of the geometric realisation of diagrammatic sets. We will take the same approach as in the previous section, but we will have to deal with surjective maps between molecules, and thus we will need to take more care when constructing the forgetful functor to \( \prePos \). We notice that we can leave unchanged the \citedef{geom_real} on geometric realisation, as the proof of functoriality equally applies if we add degeneracies. What breaks is the construction of the preorder \( \preceq \), that does not behave functorialy as the surjections do not preserve orientations in general. Thus, we will adapt it here. 
+
+We aim to construct a functor \( \U : \eye \to \prePos \). For that we consider \( V \in \eye \), and as usual, we associate it its underlying poset \( (\H V, \le) \). Now, the preorder is the reflexive and transitive closure of the relation given by:
+\begin{equation*}
+    x \preceq y \iff x \in \partial^-_0 y \text{ or } y \in \partial^+_0 x
+\end{equation*}
+That is whenever \( x \preceq y \) (and \( x \neq y \)), then \( x \) or \( y \) is a point (or both by transitivity). Now, a map \( f : P \to Q \) of \( \eye \) satisfies in particular 
+\begin{equation*}
+    \partial^\alpha_0f(x) = f(\partial^\alpha_0 x) 
+\end{equation*}
+for all \( x \in P \), thus if \(  x \in \partial^-_0 y \), then \(  f(x) \in \partial^-_0 f(y) \), making \( \U \) a functor \( \eye \to \prePos \). We now have the same picture as previously
+\begin{center}
+    \begin{tikzcd}
+        \eye\Sets \arrow[rrrrrrd, "|\dash|_d \defeq \Lan_\y(|k_d\dash|_{d\Delta})", bend left]                                                                            &  &                                             &  &                                                              &  &                          \\
+                    &  & \prePos \arrow[dd, dashed] \arrow[rr, "dN"] &  & \dsSet \arrow[dd, "\iota^*"] \arrow[rr, "|\dash|_{d\Delta}"] &  & \dTop \arrow[dd, dashed] \\
+        \eye \arrow[rrrrd, "k"', bend right=49] \arrow[rrrru, "k_d", bend left=49] \arrow[rru, dashed] \arrow[rrd, dashed] \arrow[uu, "\y", hook] \arrow[dd, "\y"', hook] &  &                                             &  &                                                              &  &                          \\
+        &  & \Pos \arrow[rr, "N"']                       &  & \sSet \arrow[rr, "|\dash|_\Delta"']                          &  & \Top                     \\
+        \eye\Sets \arrow[rrrrrru, "|\dash|\defeq \Lan_\y(|k\dash|_\Delta)"',  bend right]    &  & &  &   &  &                         
+        \end{tikzcd}
+\end{center}
+with the whole category of diagrammatic sets.
+\subsection{Realisation of combinatorial computads}
 
 We call \( \eye_i \) the skeleton of the category of combinatorial computad, that is atoms and inclusions. We have the following picture:
 \begin{center}
@@ -53,26 +133,5 @@ We summarize our constructions with the following diagram where everything commu
         \end{tikzcd}
 \end{center}
 
-\subsection{From diagrammatic sets to directed simplicial sets}
 
-In this part, we study a different version of the geometric realisation of diagrammatic sets. We will take the same approach as in the previous section, but we will have to deal with surjective maps between molecules, and thus we will need to take more care when constructing the forgetful functor to \( \prePos \). We notice that we can leave unchanged the \citedef{geom_real} on geometric realisation, as the proof of functoriality equally applies if we add degeneracies. What breaks is the construction of the preorder \( \preceq \), that does not behave functorialy as the surjections do not preserve orientations in general. Thus, we will adapt it here. 
 
-We aim to construct a functor \( \U : \eye \to \prePos \). For that we consider \( V \in \eye \), and as usual, we associate it its underlying poset \( (\H V, \le) \). Now, the preorder is the reflexive and transitive closure of the relation given by:
-\begin{equation*}
-    x \preceq y \iff x \in \partial^-_0 y \text{ or } y \in \partial^+_0 x
-\end{equation*}
-That is whenever \( x \preceq y \) (and \( x \neq y \)), then \( x \) or \( y \) is a point (or both by transitivity). Now, a map \( f : P \to Q \) of \( \eye \) satisfies in particular 
-\begin{equation*}
-    \partial^\alpha_0f(x) = f(\partial^\alpha_0 x) 
-\end{equation*}
-for all \( x \in P \), thus if \(  x \in \partial^-_0 y \), then \(  f(x) \in \partial^-_0 f(y) \), making \( \U \) a functor \( \eye \to \prePos \). We now have the same picture as previously
-\begin{center}
-    \begin{tikzcd}
-        \eye\Sets \arrow[rrrrrrd, "|\dash|_d \defeq \Lan_\y(|k_d\dash|_{d\Delta})", bend left]                                                                            &  &                                             &  &                                                              &  &                          \\
-                    &  & \prePos \arrow[dd, dashed] \arrow[rr, "dN"] &  & \dsSet \arrow[dd, "\iota^*"] \arrow[rr, "|\dash|_{d\Delta}"] &  & \dTop \arrow[dd, dashed] \\
-        \eye \arrow[rrrrd, "k"', bend right=49] \arrow[rrrru, "k_d", bend left=49] \arrow[rru, dashed] \arrow[rrd, dashed] \arrow[uu, "\y", hook] \arrow[dd, "\y"', hook] &  &                                             &  &                                                              &  &                          \\
-        &  & \Pos \arrow[rr, "N"']                       &  & \sSet \arrow[rr, "|\dash|_\Delta"']                          &  & \Top                     \\
-        \eye\Sets \arrow[rrrrrru, "|\dash|\defeq \Lan_\y(|k\dash|_\Delta)"',  bend right]    &  & &  &   &  &                         
-        \end{tikzcd}
-\end{center}
-with the whole category of diagrammatic sets.
